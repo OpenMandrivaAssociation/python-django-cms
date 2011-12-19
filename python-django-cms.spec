@@ -25,7 +25,7 @@ BuildRequires:	python-django-south >= 0.7.2
 BuildRequires:	python-html5lib
 BuildRequires:	python-django-mptt >= 0.4.2
 BuildRequires:	python-django-sekizai >= 0.4.2
-BuildRequires:	python-sphinx
+BuildRequires:	python-setuptools, python-sphinx
 
 %description
 Django CMS is an application for managing hierarchical pages of
