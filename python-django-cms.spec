@@ -1,17 +1,17 @@
 %define	module	django-cms
-%define name	python-%{module}
-%define version 2.2
-%define release %mkrel 1
+
+%if %{_use_internal_dependency_generator}
+%define __noautoreq 'pythonegg\\((django-sekizai\\)'
+%endif
 
 Summary:	An advanced Django CMS
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		python-%{module}
+Version:	2.3.3
+Release:	2
 Source0:	http://pypi.python.org/packages/source/d/%{module}/%{module}-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
 Url:		https://www.django-cms.org/
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch:	noarch
 Requires:	python-django >= 1.2.5
 Requires:	python-django-classy-tags >= 0.3.4.1
@@ -25,7 +25,8 @@ BuildRequires:	python-django-south >= 0.7.2
 BuildRequires:	python-html5lib
 BuildRequires:	python-django-mptt >= 0.4.2
 BuildRequires:	python-django-sekizai >= 0.4.2
-BuildRequires:	python-setuptools, python-sphinx
+BuildRequires:	python-setuptools
+BuildRequires:	python-sphinx
 
 %description
 Django CMS is an application for managing hierarchical pages of
@@ -39,16 +40,19 @@ applications.
 %setup -q -n %{module}-%{version}
 
 %install
-%__rm -rf %{buildroot}
 PYTHONDONTWRITEBYTECODE= %__python setup.py install --root=%{buildroot} --record=FILE_LIST
+sed -i 's/.*egg-info$//' FILE_LIST
 pushd docs
 make html
 popd
 
-%clean
-%__rm -rf %{buildroot}
-
 %files -f FILE_LIST
-%defattr(-,root,root)
 %doc AUTHORS CHANGELOG.txt LICENSE README.rst docs/build/html/
+
+
+
+%changelog
+* Mon Dec 19 2011 Lev Givon <lev@mandriva.org> 2.2-1
++ Revision: 743844
+- imported package python-django-cms
 
