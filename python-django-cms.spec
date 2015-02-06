@@ -7,7 +7,7 @@
 Summary:	An advanced Django CMS
 Name:		python-%{module}
 Version:	2.3.3
-Release:	2
+Release:	3
 Source0:	http://pypi.python.org/packages/source/d/%{module}/%{module}-%{version}.tar.gz
 License:	BSD
 Group:		Development/Python
