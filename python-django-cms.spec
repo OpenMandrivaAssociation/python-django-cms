@@ -19,6 +19,7 @@ Requires:	python-django-south >= 0.7.2
 Requires:	python-html5lib
 Requires:	python-django-mptt >= 0.4.2
 Requires:	python-django-sekizai >= 0.4.2
+BuildRequires:	make
 BuildRequires:	python-django >= 1.2.5
 BuildRequires:	python-django-classy-tags >= 0.3.4.1
 BuildRequires:	python-django-south >= 0.7.2
