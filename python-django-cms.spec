@@ -1,33 +1,32 @@
 %define	module	django-cms
+%define oname django_cms
 
-%if %{_use_internal_dependency_generator}
-%define __noautoreq 'pythonegg\\((django-sekizai\\)'
-%endif
-
+Name:		python-django-cms
 Summary:	An advanced Django CMS
-Name:		python-%{module}
-Version:	2.3.3
-Release:	3
-Source0:	http://pypi.python.org/packages/source/d/%{module}/%{module}-%{version}.tar.gz
-License:	BSD
+Version:	5.0.5
+Release:	1
+License:	BSD-3-Clause
 Group:		Development/Python
-Url:		https://www.django-cms.org/
+URL:		https://www.django-cms.org/
+Source0:	https://pypi.python.org/packages/source/d/%{module}/%{oname}-%{version}.tar.gz#/%{name}-%{version}.tar.gz
+BuildSystem:	python
 BuildArch:	noarch
-Requires:	python-django >= 1.2.5
-Requires:	python-django-classy-tags >= 0.3.4.1
-Requires:	python-django-south >= 0.7.2
-Requires:	python-html5lib
-Requires:	python-django-mptt >= 0.4.2
-Requires:	python-django-sekizai >= 0.4.2
-BuildRequires:	make
-BuildRequires:	python-django >= 1.2.5
-BuildRequires:	python-django-classy-tags >= 0.3.4.1
-BuildRequires:	python-django-south >= 0.7.2
-BuildRequires:	python-html5lib
-BuildRequires:	python-django-mptt >= 0.4.2
-BuildRequires:	python-django-sekizai >= 0.4.2
-BuildRequires:	python-setuptools
-BuildRequires:	python-sphinx
+BuildRequires:	python%{pyver}dist(argon2-cffi)
+BuildRequires:	python%{pyver}dist(bcrypt)
+BuildRequires:	python%{pyver}dist(django)
+BuildRequires:	python%{pyver}dist(django-classy-tags)
+BuildRequires:	python%{pyver}dist(django-formtools)
+BuildRequires:	python%{pyver}dist(django-treebeard)
+BuildRequires:	python%{pyver}dist(django-sekizai)
+BuildRequires:	python%{pyver}dist(djangocms-admin-style)
+BuildRequires:	python%{pyver}dist(packaging)
+BuildRequires:	python%{pyver}dist(pip)
+BuildRequires:	python%{pyver}dist(setuptools)
+BuildRequires:	python%{pyver}dist(setuptools-scm)
+BuildRequires:	python%{pyver}dist(sphinx)
+BuildRequires:	python%{pyver}dist(wheel)
+
+
 
 %description
 Django CMS is an application for managing hierarchical pages of
@@ -38,22 +37,20 @@ based URLs, and this navigation can be extended by custom Django
 applications.
 
 %prep
-%setup -q -n %{module}-%{version}
+%autosetup -n %{oname}-%{version} -p1
+# Remove bundled egg-info
+rm -rf %{oname}.egg-info
+
+%build
+%py_build
 
 %install
-PYTHONDONTWRITEBYTECODE= %__python setup.py install --root=%{buildroot} --record=FILE_LIST
-sed -i 's/.*egg-info$//' FILE_LIST
-pushd docs
-make html
-popd
+%py_install
 
-%files -f FILE_LIST
-%doc AUTHORS CHANGELOG.txt LICENSE README.rst docs/build/html/
-
-
-
-%changelog
-* Mon Dec 19 2011 Lev Givon <lev@mandriva.org> 2.2-1
-+ Revision: 743844
-- imported package python-django-cms
-
+%files
+%doc README.rst
+%license LICENSE
+%{_bindir}/djangocms
+%{python_sitelib}/menus
+%{python_sitelib}/cms
+%{python_sitelib}/%{oname}-%{version}.dist-info
