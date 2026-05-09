@@ -3,7 +3,7 @@
 
 Name:		python-django-cms
 Summary:	An advanced Django CMS
-Version:	5.0.6
+Version:	5.0.7
 Release:	1
 License:	BSD-3-Clause
 Group:		Development/Python
