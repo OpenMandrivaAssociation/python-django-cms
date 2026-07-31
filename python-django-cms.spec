@@ -3,7 +3,7 @@
 
 Name:		python-django-cms
 Summary:	An advanced Django CMS
-Version:	5.0.7
+Version:	5.1.0
 Release:	1
 License:	BSD-3-Clause
 Group:		Development/Python
@@ -37,7 +37,7 @@ based URLs, and this navigation can be extended by custom Django
 applications.
 
 %prep
-%autosetup -n %{oname}-%{version} -p1
+%autosetup -n django_cms-5.1.0 -p1
 # Remove bundled egg-info
 rm -rf %{oname}.egg-info
 
